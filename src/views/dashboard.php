@@ -1,8 +1,8 @@
 <?php
-require '../../config/database.php';
-require '../model/Post.php';
-require '../controller/PostController.php';
 session_start();
+require '../../config/database.php';
+require '../model/Category.php';
+require '../controller/PostController.php';
 
 // Crea un'istanza del PostController
 $postController = new PostController();
@@ -10,7 +10,8 @@ $postController = new PostController();
 $posts = $postController->getUserPosts($conn);
 
 
-
+$allCat = new Category();
+$categories = $allCat->allCategories($conn);
 ?>
 
 <?php include './Components/header.php' ?>

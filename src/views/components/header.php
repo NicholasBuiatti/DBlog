@@ -1,6 +1,6 @@
 <?php
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {
+// session_start();
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
     // Distruggi la sessione
     session_unset(); // Rimuove tutte le variabili di sessione
     session_destroy(); // Distrugge la sessione
@@ -34,10 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {
                     <a href="../dashboard.php" class="btn btn-primary text-decoration-none text-black">Dashboard</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a href="../CRUD/createPost.php" class="btn btn-primary text-decoration-none text-black">Crea</a>
+                    <a href="../CRUD/create.php" class="btn btn-primary text-decoration-none text-black">Crea</a>
                 </li>
                 <li class="nav-item mx-2">
                     <form method="POST" style="display: inline;">
+                        <input type="hidden" name="logout" value="1">
                         <button type="submit" name="logout" class="btn btn-primary" style="color: black; text-decoration: none;">Disconnetti</button>
                     </form>
                 </li>

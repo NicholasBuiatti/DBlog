@@ -1,9 +1,13 @@
 <?php
 require '../../config/database.php';
 require '../model/Post.php';
+require '../model/Category.php';
 
 $allPosts = new Post();
 $posts = $allPosts->getAllPosts($conn);
+
+$allCat = new Category();
+$categories = $allCat->allCategories($conn);
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +34,17 @@ $posts = $allPosts->getAllPosts($conn);
             </ul>
         </div>
     </nav>
+
+
+    <section class="container">
+        <ul class="list-inline text-center">
+            <?php foreach ($categories as $category) { ?>
+                <li class="list-inline-item">
+                    <span class="badge rounded-pill bg-primary"><?php echo $category['name'] ?></span>
+                </li>
+            <?php } ?>
+        </ul>
+    </section>
 
     <!-- SEZIONE PER I POSTS -->
     <article class="container mt-4">
