@@ -17,7 +17,8 @@ class PostController
         }
     }
 
-    function validateCreate($dati, $conn)
+    //VALIDAZIONE METODO CREATE
+    function validateSave($dati, $conn, $isUpdate = false)
     {
         $title = $dati['title'];
         $content = $dati['content'];
@@ -37,12 +38,44 @@ class PostController
             $errors[] = "La categoria è obbligatoria.";
         }
 
+        if (!empty($errors)) {
+            return $errors;
+        }
+
         try {
-            $save = new Post();
-            $result = $save->create($conn, $title, $content, $image, $category_id, $user_id);
-            return $result; //restituisci il mio nuovo oggetto
+            $post = new Post();
+
+            // Verifica se è un'operazione di aggiornamento o creazione
+            if ($isUpdate) {
+                // Assumi che $dati contenga anche l'id del post da aggiornare
+                $post_id = $dati['id'];
+                $result = $post->update($conn, $post_id, $title, $content, $image, $category_id, $user_id);
+            } else {
+                $result = $post->create($conn, $title, $content, $image, $category_id, $user_id);
+            }
+
+            return $result;
         } catch (Exception $e) {
             return ["Errore durante il salvataggio del post: " . $e->getMessage()];
+        }
+    }
+
+    function deletePost($conn, $post_id)
+    {
+        try {
+            $post = new Post();
+            $result = $post->delete($conn, $post_id);
+
+            if ($result['success']) {
+                // Reindirizza l'utente a una pagina di conferma o alla lista dei post
+                header("Location: ./dashboard.php");
+                exit();
+            } else {
+                // Gestisci l'errore
+                echo $result['message'];
+            }
+        } catch (Exception $e) {
+            echo "Errore durante l'eliminazione del post: " . $e->getMessage();
         }
     }
 }

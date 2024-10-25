@@ -19,14 +19,14 @@ include '../Components/header.php';
     <?php if ($postDetails): ?>
         <h1>Titolo: <?= $postDetails['title'] ?></h1>
         <p><?= $postDetails['content'] ?></p>
-        <?php if ($postDetails['image']): ?>
-            <img src="data:image/jpeg;base64,<?= base64_encode($postDetails['image']) ?>" alt="Post Image" class="img-fluid">
-        <?php endif; ?>
-        <p>Categoria: <?= $postDetails['category_name'] ?></p>
+        <img src="<?= $postDetails['image'] ?>" alt="Post Image" class="img-fluid">
+        <p>Categoria: <?= $postDetails['name'] ?></p>
         <p>Autore: <?= $postDetails['username'] ?></p>
     <?php else: ?>
         <p class="error">Post non trovato.</p>
     <?php endif; ?>
+
+    <!-- <pre><?php print_r($postDetails); ?></pre> -->
 </div>
 
 <?php include '../Components/footer.php'; ?>

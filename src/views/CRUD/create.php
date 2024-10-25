@@ -12,9 +12,9 @@ $categories = $allCat->allCategories($conn);
 
 
 $postController = new PostController();
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create'])) {
     $dati = $_POST;
-    $result = $postController->validateCreate($dati, $conn);
+    $result = $postController->validateSave($dati, $conn);
 
     if (is_array($result)) {
         // Se ci sono errori, gestiscili
@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="container">
     <h2 class="text-center mb-4">Crea un Nuovo Post</h2>
     <form method="POST">
+        <input type="hidden" name="create" value="1">
         <input type="hidden" name="user_id" value="<?= $_SESSION['user_id']; ?>" />
 
         <div class="form-group">
@@ -51,8 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <div class="form-group">
-            <label for="image">Immagine</label>
-            <input type="file" class="form-control" id="image" name="image">
+            <label for="image">URL Immagine</label>
+            <input type="text" class="form-control" id="image" name="image" placeholder="Inserisci l'URL dell'immagine">
         </div>
 
         <div class="form-group">

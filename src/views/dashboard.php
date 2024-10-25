@@ -12,6 +12,11 @@ $posts = $postController->getUserPosts($conn);
 
 $allCat = new Category();
 $categories = $allCat->allCategories($conn);
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['destroy'])) {
+    $destroy = $postController->deletePost($conn, $_POST['destroy']);
+}
 ?>
 
 <?php include './Components/header.php' ?>
@@ -40,13 +45,23 @@ $categories = $allCat->allCategories($conn);
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="..." class="img-fluid rounded-start">
+                            <img src="<?= $post['image'] ?>" class="img-fluid rounded-start">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title"><?= $post['title'] ?></h5>
                                 <p class="card-text"><?= $post['content'] ?></p>
-                                <p class="card-text"><small class="text-muted"><?= $post['created_at'] ?></small></p>
+                                <div class="row justify-content-between align-items-center">
+                                    <p class="card-text col-3 mb-0"><small class="text-muted"><?= $post['created_at'] ?></small></p>
+                                    <div class="col-6 row text-end">
+                                        <a href="./CRUD/update.php?id=<?php echo $post['id']; ?>" class="col btn btn-warning">Modifica</a>
+                                        <a href="./CRUD/show.php?id=<?php echo $post['id']; ?>" class="mx-2 col btn btn-info">Info</a>
+                                        <form action="" method="POST" class="col p-0">
+                                            <input type="hidden" name='destroy' value="<?= $post['id'] ?>">
+                                            <button type="submit" class="btn btn-danger">Cancella</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,6 +71,6 @@ $categories = $allCat->allCategories($conn);
     </ul>
 </article>
 
-<!-- <pre><?php print_r($posts); ?></pre> -->
+<pre><?php print_r($posts); ?></pre>
 
 <?php include './Components/footer.php' ?>
