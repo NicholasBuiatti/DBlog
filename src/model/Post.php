@@ -5,7 +5,10 @@ class Post
 
     function getAllPosts($conn)
     {
-        $query = 'SELECT * FROM posts';
+        $query = 'SELECT posts.*, users.username, categories.name 
+        FROM posts 
+        JOIN users ON posts.user_id = users.id
+        JOIN categories ON posts.category_id = categories.id';
         $data = $conn->prepare($query);
         $data->execute();
 
@@ -15,7 +18,11 @@ class Post
 
     function getUserPosts($user_id, $conn)
     {
-        $query = 'SELECT * FROM posts WHERE user_id = :user_id';
+        $query = 'SELECT posts.*, users.username, categories.name
+        FROM posts
+        JOIN users ON posts.user_id = users.id
+        JOIN categories ON posts.category_id = categories.id
+        WHERE user_id = :user_id';
         $data = $conn->prepare($query);
         $data->execute([':user_id' => $user_id]);
 

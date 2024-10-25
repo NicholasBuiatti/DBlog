@@ -4,6 +4,12 @@ require '../../config/database.php';
 require '../model/Category.php';
 require '../controller/PostController.php';
 
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // Se non è loggato, reindirizza alla pagina index.php
+    header("Location: index.php");
+    exit();
+}
+
 // Crea un'istanza del PostController
 $postController = new PostController();
 // Ottieni i post dell'utente passando la connessione
@@ -50,15 +56,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['destroy'])) {
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title"><?= $post['title'] ?></h5>
-                                <p class="card-text"><?= $post['content'] ?></p>
                                 <div class="row justify-content-between align-items-center">
-                                    <p class="card-text col-3 mb-0"><small class="text-muted"><?= $post['created_at'] ?></small></p>
-                                    <div class="col-6 row text-end">
-                                        <a href="./CRUD/update.php?id=<?php echo $post['id']; ?>" class="col btn btn-warning">Modifica</a>
-                                        <a href="./CRUD/show.php?id=<?php echo $post['id']; ?>" class="mx-2 col btn btn-info">Info</a>
-                                        <form action="" method="POST" class="col p-0">
+                                    <div class="col-4">
+                                        <p class="card-text">Categoria: <?= $post['name'] ?></p>
+                                        <p class="card-text mb-0"><small class="text-muted">Creato il: <?= $post['created_at'] ?></small></p>
+                                    </div>
+                                    <div class="col-2 row text-end">
+                                        <div>
+                                            <a href="./CRUD/update.php?id=<?php echo $post['id']; ?>" class=" btn btn-warning"><i class="fa-solid fa-pen"></i></a>
+                                        </div>
+                                        <div class="my-2">
+                                            <a href="./CRUD/show.php?id=<?php echo $post['id']; ?>" class=" btn btn-info"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                        </div>
+                                        <form action="" method="POST" class="">
                                             <input type="hidden" name='destroy' value="<?= $post['id'] ?>">
-                                            <button type="submit" class="btn btn-danger">Cancella</button>
+                                            <button type="submit" class=" btn btn-danger"><i class="fa-solid fa-trash"></i></button>
                                         </form>
                                     </div>
                                 </div>
@@ -71,6 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['destroy'])) {
     </ul>
 </article>
 
-<pre><?php print_r($posts); ?></pre>
+<!-- <pre><?php print_r($posts); ?></pre> -->
 
 <?php include './Components/footer.php' ?>

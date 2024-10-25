@@ -16,14 +16,21 @@ include '../Components/header.php';
 ?>
 
 <div class="container">
+    <a href="../dashboard.php" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i></a>
     <?php if ($postDetails): ?>
-        <h1>Titolo: <?= $postDetails['title'] ?></h1>
+        <div class="row">
+            <div class="col-6">
+                <img src="<?= $postDetails['image'] ?>" alt="Post Image" class="img-fluid">
+            </div>
+            <div class="col-6">
+                <h1><?= $postDetails['title'] ?></h1>
+                <p>Categoria: <?= $postDetails['name'] ?></p>
+            </div>
+        </div>
+        <hr>
         <p><?= $postDetails['content'] ?></p>
-        <img src="<?= $postDetails['image'] ?>" alt="Post Image" class="img-fluid">
-        <p>Categoria: <?= $postDetails['name'] ?></p>
-        <p>Autore: <?= $postDetails['username'] ?></p>
     <?php else: ?>
-        <p class="error">Post non trovato.</p>
+        <h1 class="error text-center">Post non trovato.</h1>
     <?php endif; ?>
 
     <!-- <pre><?php print_r($postDetails); ?></pre> -->

@@ -1,5 +1,5 @@
-<footer>
-    <h2>sono un footer</h2>
+<footer class="mt-4">
+    <!-- <h2>sono un footer</h2> -->
 </footer>
 </body>
 

@@ -20,7 +20,7 @@ class UserController
             session_start();
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-
+            $_SESSION['loggedin'] = true;
             header('Location: ./dashboard.php');
             exit();  // È buona pratica usare exit dopo un redirect
         } else {

@@ -24,9 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
 
 </head>
 
-<body style="background: linear-gradient(135deg, #e0e0e0, #c0c0c0); color: #333; font-family: Arial, sans-serif;">
+<body style="background-color: #f5f3e7; color: #333; font-family: Arial, sans-serif;">
 
-    <nav class="navbar" style="background-color: #b0b0b0;">
+    <nav class="navbar mb-4 shadow" style="background-color: #e0ddd0;">
         <div class="container-fluid">
             <a class="navbar-brand fs-2" href="#">MyBlog</a>
             <ul class="navbar-nav flex-row color-dark">

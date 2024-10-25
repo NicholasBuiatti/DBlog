@@ -67,11 +67,9 @@ class PostController
             $result = $post->delete($conn, $post_id);
 
             if ($result['success']) {
-                // Reindirizza l'utente a una pagina di conferma o alla lista dei post
                 header("Location: ./dashboard.php");
                 exit();
             } else {
-                // Gestisci l'errore
                 echo $result['message'];
             }
         } catch (Exception $e) {
