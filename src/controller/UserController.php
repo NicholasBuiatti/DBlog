@@ -22,7 +22,7 @@ class UserController
             $_SESSION['username'] = $user['username'];
             $_SESSION['loggedin'] = true;
             header('Location: ./dashboard.php');
-            exit();  // È buona pratica usare exit dopo un redirect
+            exit();
         } else {
             echo 'Password o nome utente non corretti!';
         }

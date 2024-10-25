@@ -9,7 +9,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     // Se non è loggato, reindirizza alla pagina index.php
-    header("Location: ./index.php");
+    header("Location: ../index.php");
     exit();
 }
 

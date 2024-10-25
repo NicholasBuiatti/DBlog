@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
     <nav class="navbar mb-4 shadow" style="background-color: #e0ddd0;">
         <div class="container-fluid">
             <a class="navbar-brand fs-2" href="#">MyBlog</a>
-            <ul class="navbar-nav flex-row color-dark">
+            <ul class="navbar-nav flex-row color-dark <?= (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) ? 'd-none' : '' ?>">
                 <li class="nav-item mx-2 text-decoration-none">
                     <a href="../dashboard.php" class="btn btn-primary text-decoration-none text-black">Dashboard</a>
                 </li>

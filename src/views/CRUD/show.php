@@ -20,7 +20,7 @@ include '../Components/header.php';
     <?php if ($postDetails): ?>
         <div class="row">
             <div class="col-6">
-                <img src="<?= $postDetails['image'] ?>" alt="Post Image" class="img-fluid">
+                <img src="<?= $postDetails['image'] ?>" alt="Post Image" class="img-fluid w-100 h-100 rounded-start" style="object-fit: cover;">
             </div>
             <div class="col-6">
                 <h1><?= $postDetails['title'] ?></h1>

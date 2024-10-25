@@ -54,7 +54,7 @@ $categories = $allCat->allCategories($conn);
                     <div class="card mb-3">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="..." class="img-fluid rounded-start">
+                                <img src="<?= $post['image'] ?>" class="img-fluid rounded-start">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -74,7 +74,7 @@ $categories = $allCat->allCategories($conn);
             <?php endforeach; ?>
         </ul>
     </article>
-    <pre><?php print_r($posts); ?></pre>
+    <!-- <pre><?php print_r($posts); ?></pre> -->
 </body>
 
 </html>
